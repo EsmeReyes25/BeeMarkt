@@ -9,5 +9,65 @@
 <body>
     <script type="module" src="./js/connection.js"></script>
     <script type="module" src="./js/index.js"></script>
+
+    <!--Este form debe borrarse después de terminar de introducir los datos en la bd-->
+    <form name="formulario" id="formulario">
+        <input
+            type="text"
+            name="categ"
+            placeholder="Enter the category"
+            style="width: 100%"
+        >
+        <input
+            type="text"
+            name="contacto"
+            placeholder="Enter the URL of the contact"
+            style="width: 100%"
+        >
+        <input
+            type="text"
+            name="imgUrl"
+            placeholder="Enter the URL of the image"
+            style="width: 100%"
+        >
+        <input
+            type="number"
+            name="precio"
+            min="0"
+            max="999"
+            placeholder="Enter the price"
+            style="width: 100%"
+        >
+        <input
+            type="text"
+            name="productName"
+            placeholder="Enter the name of the Product"
+            style="width: 100%"
+        >
+        <input
+            type="text"
+            name="dias"
+            placeholder="Enter the days of sale"
+            style="width: 100%"
+        >
+        <input
+            type="text"
+            name="horas"
+            placeholder="Enter sales hours"
+            style="width: 100%"
+        >
+        <input
+            type="text"
+            name="vendorName"
+            placeholder="Enter the name of the vendor"
+            style="width: 100%"
+        >
+        <input 
+            type="submit" 
+            id="btnAdd"
+            value="Agregar"
+        >
+    </form>
+
 </body>
 </html>

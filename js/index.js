@@ -1,11 +1,21 @@
 import { getProducts, saveProduct, deleteProduct } from './connection.js';
 let products = []
 
+// ------------------ Estas dos líneas deben borrarse al terminar de introducir los datos en la bd -------------------------
+const form = document.getElementById("formulario")
+const btnAgregar = document.getElementById("btnAdd")
+
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
 document.addEventListener('DOMContentLoaded', async (e) => {
     products = await getProducts()
     console.log('productos:', products)
     main()
+
+    // -------------- Este listener debe borrarse o comentarse después de terminar de introducir los datos en la bd ----------------------
+    btnAgregar.addEventListener('click', e => {
+        e.preventDefault(); // Evita que se refresque la página
+        insertProduct()
+    })
 })
 
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
@@ -14,27 +24,25 @@ const main = () => {
     // printCards(products)
 
     // Aquí van las llamadas a las demás funciones
-
-    // Data to be added to the database
-    const sendData = {
-        category: 'bebidas',
-        contact: 'contacto',
-        image_url: 'imagen',
-        price: '15',
-        product_name: 'agua de sabor',
-        sale_days: 'Lunes, Martes, Miercoles, Jueves, Viernes',
-        sale_hours: '08:00 - 14:00',
-        vendor_name: 'Juan'
-    }
-    
-    //insertProduct(sendData)
-    //deleteProd(producto)
+    // deleteProd(producto)
 }
 
 // ---------------- Aquí van las definiciones de las funciones ------------------
 // Function to add a product
-const insertProduct = async (data) => {
-    await saveProduct(data)
+const insertProduct = async () => {
+    // Data to be added to the database
+    const sendData = {
+        category: form.categ.value,
+        contact: form.contacto.value,
+        image_url: form.imgUrl.value,
+        price: form.precio.value,
+        product_name: form.productName.value,
+        sale_days: form.dias.value,
+        sale_hours: form.horas.value,
+        vendor_name: form.vendorName.value
+    }
+    await saveProduct(sendData)
+    form.reset()
 }
 
 // Function to delete a product
