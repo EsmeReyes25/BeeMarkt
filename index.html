@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+
     <title>BeeMarkt</title>
 </head>
 <body>
     <script type="module" src="./js/connection.js"></script>
     <script type="module" src="./js/index.js"></script>
+    <label for=""> Verifique que sea de la UG</label>
+    <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba tu correo universitario">
+    <button class="btnVerificar" id="btnVerificar" onclick="validarCorreo()">Verificar</button>
+
+      
 
     <!--Este form debe borrarse después de terminar de introducir los datos en la bd-->
-    <form name="formulario" id="formulario">
+    <template>
+        <form name="formulario" id="formulario">
         <input
             type="text"
             name="categ"
@@ -67,7 +75,24 @@
             id="btnAdd"
             value="Agregar"
         >
-    </form>
+        </form>
+    </template>
+
+    <script>
+        function validarCorreo() {
+            var inputCorreo = document.getElementById("inputCorreo")
+            var correo = inputCorreo.value.trim()
+            var regex = /^[a-zA-Z0-9._%+-]+@ugto\.mx$/i
+
+            if (regex.test(correo)) {
+                console.log("Correo válido")
+                
+            } else {
+                console.log("Correo no válido")
+               alert("Correo inválido")
+            }
+        }
+    </script>
 
 </body>
 </html>

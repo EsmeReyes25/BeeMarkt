@@ -1,8 +1,9 @@
 import { getProducts, saveProduct, deleteProduct } from './connection.js';
 
+const inputCorreo = document.getElementById("inputCorreo");
 // ------------------ Estas dos líneas deben borrarse al terminar de introducir los datos en la bd -------------------------
-const form = document.getElementById("formulario")
-const btnAgregar = document.getElementById("btnAdd")
+//const form = document.getElementById("formulario")
+const btnVerificar = document.getElementById("btnVerificar")
 
 let products = []
 
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     main()
 })
 
+
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
 const main = () => {
     // Aquí va la llamada a la función para imprimir tarjetas
@@ -22,10 +24,11 @@ const main = () => {
     // deleteProd(producto)
 
     // -------------- Este listener debe borrarse o comentarse después de terminar de introducir los datos en la bd ----------------------
-    btnAgregar.addEventListener('click', e => {
+   /* btnAgregar.addEventListener('click', e => {
         e.preventDefault(); // Evita que se refresque la página
         insertProduct()
-    })
+    })*/
+
 }
 
 // ---------------- Aquí van las definiciones de las funciones ------------------
