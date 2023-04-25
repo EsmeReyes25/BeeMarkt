@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="./js/connection.js"></script>
+    <script type="module" src="./js/index.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 
     <title>BeeMarkt</title>
 </head>
 <body>
-    <script type="module" src="./js/connection.js"></script>
-    <script type="module" src="./js/index.js"></script>
-    <label for=""> Verifique que sea de la UG</label>
-    <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba tu correo universitario">
-    <button class="btnVerificar" id="btnVerificar" onclick="validarCorreo()">Verificar</button>
+
+ 
+<div class="container">
+    <div class="muestra"></div>
+    <div class="contenedor">
+        <div class="cuadro">
+            <img src="./images/logo.png" alt="" class="logo" width="75%" height="70%">
+            <label for=""> Verifique que sea de la UG</label>
+            <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba su correo universitario">
+            <button class="btnVerificar" id="btnVerificar" onclick="validarCorreo()">Verificar</button>
+        </div>
+    </div>
+</div>
+
+
 
       
 
@@ -104,6 +116,21 @@
             </fieldset>
         </form>
     </template>
+    <script>
+        function validarCorreo() {
+            var inputCorreo = document.getElementById("inputCorreo")
+            var correo = inputCorreo.value.trim()
+            var regex = /^[a-zA-Z0-9._%+-]+@ugto\.mx$/i
 
+            if (regex.test(correo)) {
+                console.log("Correo válido")
+
+             
+            } else {
+                console.log("Correo no válido")
+                alert("correo incorrecto")
+            }
+        }
+    </script>
 </body>
 </html>
