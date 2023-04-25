@@ -1,8 +1,8 @@
-import { getProducts, saveProduct, deleteProduct } from './connection.js';
+import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imports the querys to get, save and delete products
 
-// ------------------ Estas dos líneas deben borrarse al terminar de introducir los datos en la bd -------------------------
-const form = document.getElementById("formulario")
-const btnAgregar = document.getElementById("btnAdd")
+const formularioInsert = document.querySelector('#formularioInsert').content // Gets the form template
+const form = formularioInsert.querySelector(".formulario") // Selects the form from the template
+const btnAgregar = formularioInsert.querySelector('.btnAdd') // Selects the button to add products
 
 let products = []
 
@@ -19,9 +19,6 @@ const main = () => {
     // printCards(products)
 
     // Aquí van las llamadas a las demás funciones y listeners
-    // deleteProd(producto)
-
-    // -------------- Este listener debe borrarse o comentarse después de terminar de introducir los datos en la bd ----------------------
     btnAgregar.addEventListener('click', e => {
         e.preventDefault(); // Evita que se refresque la página
         insertProduct()
