@@ -1,8 +1,8 @@
 import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imports the querys to get, save and delete products
 
-//const formularioInsert = document.querySelector('#formularioInsert').content // Gets the form template
-//const form = formularioInsert.querySelector(".formulario") // Selects the form from the template
-//const btnAgregar = formularioInsert.querySelector('.btnAdd') // Selects the button to add products
+const formularioInsert = document.querySelector('#formularioInsert').content // Gets the form template
+const form = formularioInsert.querySelector(".formulario") // Selects the form from the template
+const btnAgregar = formularioInsert.querySelector('.btnAdd') // Selects the button to add products
 
 let products = []
 
@@ -27,13 +27,12 @@ inputCorreo.addEventListener("input", () => {
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
 const main = () => {
     // Aquí va la llamada a la función para imprimir tarjetas
-    // printCards(products)
 
     // Aquí van las llamadas a las demás funciones y listeners
-   // btnAgregar.addEventListener('click', e => {
-  //      e.preventDefault(); // Evita que se refresque la página
- //       insertProduct()
-  //  })
+    btnAgregar.addEventListener('click', e => {
+        e.preventDefault(); // Evita que se refresque la página
+        insertProduct()
+    })
 
 }
 
