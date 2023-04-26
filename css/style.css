@@ -67,11 +67,21 @@ form {
 label {
     text-align: left;
     margin-right: 1rem;
+    font-family: 'Comfortaa', cursive;
+    text-align: center;
 }
-  
-input,
+
 button {
     margin: 1rem 0;
+    border-radius: 10px;
+    font-family: 'Comfortaa', cursive;
+}
+
+input {
+    margin: 1rem 0;
+    border-radius: 10px;
+    background-color: #f3f3f3;
+    font-family: 'Comfortaa', cursive;
 }
   
 .inputCorreo{

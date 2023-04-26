@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module" src="./js/connection.js"></script>
     <script type="module" src="./js/index.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 
-    <title>BeeMarkt</title>
+    <title>BeeMarkttt</title>
 </head>
 <body>
 
@@ -18,9 +22,9 @@
     <div class="contenedor">
         <div class="cuadro">
             <img src="./images/logo.png" alt="" class="logo" width="75%" height="70%">
-            <label for=""> Verifique que sea de la UG</label>
-            <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba su correo universitario">
-            <button class="btnVerificar" id="btnVerificar" onclick="validarCorreo()">Verificar</button>
+            <label> Verifique que sea de la UG</label>
+            <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba su correo universitario" onclick="validarCorreo()">
+            <button class="btnVerificar" id="btnVerificar" onclick="location.href='gera.html'">Ingresar</button>
         </div>
     </div>
 </div>
@@ -29,93 +33,7 @@
 
       
 
-    <template id="formularioInsert">
-        <form name="formulario" class="formulario">
-            <fieldset>
-                <label for="categ">Categoría:</label>
-                <input
-                    type="text"
-                    name="categ"
-                    id="categ"
-                    placeholder="Ingrese la categoría"
-                    style="width: 100%"
-                    required
-                >
-                <label for="contacto">URL de contacto:</label>
-                <input
-                    type="url"
-                    name="contacto"
-                    id="contacto"
-                    placeholder="Ingrese la URL de contacto"
-                    style="width: 100%"
-                    pattern="https?://.+"
-                    required
-                >
-                <label for="imgUrl">URL de la imagen:</label>
-                <input
-                    type="url"
-                    name="imgUrl"
-                    id="imgUrl"
-                    placeholder="Ingrese la URL de la imagen"
-                    style="width: 100%"
-                    pattern="https?://.+"
-                    required
-                >
-                <label for="precio">Precio:</label>
-                <input
-                    type="number"
-                    name="precio"
-                    id="precio"
-                    min="0"
-                    max="999"
-                    placeholder="Ingrese el precio"
-                    style="width: 100%"
-                    required
-                >
-                <label for="productName">Nombre del producto:</label>
-                <input
-                    type="text"
-                    name="productName"
-                    id="productName"
-                    placeholder="Ingrese el nombre del producto"
-                    style="width: 100%"
-                    required
-                >
-                <label for="dias">Días de la venta:</label>
-                <input
-                    type="text"
-                    name="dias"
-                    id="dias"
-                    placeholder="Ingrese los días de la venta"
-                    style="width: 100%"
-                    required
-                >
-                <label for="horas">Horario de la venta:</label>
-                <input
-                    type="text"
-                    name="horas"
-                    id="horas"
-                    placeholder="Enter sales hours"
-                    style="width: 100%"
-                    required
-                >
-                <label for="vendorName">Nombre del vendedor:</label>
-                <input
-                    type="text"
-                    name="vendorName"
-                    id="vendorName"
-                    placeholder="Enter the name of the vendor"
-                    style="width: 100%"
-                    required
-                >
-                <input
-                    type="submit"
-                    class="btnAdd"
-                    value="Agregar"
-                >
-            </fieldset>
-        </form>
-    </template>
+
     <script>
         function validarCorreo() {
             var inputCorreo = document.getElementById("inputCorreo")
@@ -128,7 +46,7 @@
              
             } else {
                 console.log("Correo no válido")
-                alert("correo incorrecto")
+
             }
         }
     </script>
