@@ -1,8 +1,8 @@
-import { getProducts, saveProduct, deleteProduct } from './connection.js';
+import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imports the querys to get, save and delete products
 
-// ------------------ Estas dos líneas deben borrarse al terminar de introducir los datos en la bd -------------------------
-const form = document.getElementById("formulario")
-const btnAgregar = document.getElementById("btnAdd")
+const formularioInsert = document.querySelector('#formularioInsert').content // Gets the form template
+const form = formularioInsert.querySelector(".formulario") // Selects the form from the template
+const btnAgregar = formularioInsert.querySelector('.btnAdd') // Selects the button to add products
 
 let products = []
 
@@ -13,19 +13,27 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     main()
 })
 
+inputCorreo.addEventListener("input", () => {
+    const correo = inputCorreo.value;
+    const regex = /^[a-zA-Z0-9._%+-]+@ugto\.mx$/i;
+  
+    if (regex.test(correo)) {
+      btnVerificar.disabled = false;
+    } else {
+      btnVerificar.disabled = true;
+    }
+  });
+
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
 const main = () => {
     // Aquí va la llamada a la función para imprimir tarjetas
-    // printCards(products)
 
     // Aquí van las llamadas a las demás funciones y listeners
-    // deleteProd(producto)
-
-    // -------------- Este listener debe borrarse o comentarse después de terminar de introducir los datos en la bd ----------------------
     btnAgregar.addEventListener('click', e => {
         e.preventDefault(); // Evita que se refresque la página
         insertProduct()
     })
+
 }
 
 // ---------------- Aquí van las definiciones de las funciones ------------------
