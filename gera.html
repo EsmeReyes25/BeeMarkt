@@ -12,23 +12,6 @@
 </head>
 <body>
 
- 
-<div class="container">
-    <div class="muestra"></div>
-    <div class="contenedor">
-        <div class="cuadro">
-            <img src="./images/logo.png" alt="" class="logo" width="75%" height="70%">
-            <label for=""> Verifique que sea de la UG</label>
-            <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba su correo universitario">
-            <button class="btnVerificar" id="btnVerificar" onclick="validarCorreo()">Verificar</button>
-        </div>
-    </div>
-</div>
-
-
-
-      
-
     <template id="formularioInsert">
         <form name="formulario" class="formulario">
             <fieldset>
@@ -63,11 +46,9 @@
                 >
                 <label for="precio">Precio:</label>
                 <input
-                    type="number"
+                    type="text"
                     name="precio"
                     id="precio"
-                    min="0"
-                    max="999"
                     placeholder="Ingrese el precio"
                     style="width: 100%"
                     required
@@ -116,21 +97,6 @@
             </fieldset>
         </form>
     </template>
-    <script>
-        function validarCorreo() {
-            var inputCorreo = document.getElementById("inputCorreo")
-            var correo = inputCorreo.value.trim()
-            var regex = /^[a-zA-Z0-9._%+-]+@ugto\.mx$/i
 
-            if (regex.test(correo)) {
-                console.log("Correo válido")
-
-             
-            } else {
-                console.log("Correo no válido")
-                alert("correo incorrecto")
-            }
-        }
-    </script>
 </body>
 </html>
