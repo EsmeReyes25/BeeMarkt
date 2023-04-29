@@ -11,6 +11,12 @@ const fragment = document.createDocumentFragment()
 const Buscar = document.getElementById('buscador') // ******PENDIENTE******
 let products = []
 
+// Change color effect on header
+window.addEventListener("scroll", function() {
+    var header = document.querySelector("header")
+    header.classList.toggle("abajo", window.scrollY > 0)
+})
+
 // Funcion que muestra las tarjetas
 const creaCards = () => {
     products.forEach((item) => {
@@ -22,7 +28,13 @@ const creaCards = () => {
         cardTop.querySelector('.diasVenta').textContent = 'Días de venta: ' + item.sale_days
         cardTop.querySelector('.horasVenta').textContent = 'Horas de venta: ' + item.sale_hours
         cardTop.querySelector('.nombreVendedor').textContent = 'Nombre del vendedor: ' + item.vendor_name
-        cardTop.querySelector('.contactoVendedor').textContent = 'Contacto: ' + item.contact
+        
+        cardTop.querySelector('.contactoVendedor').textContent = item.contact
+        //cardTop.querySelector('.contactoVendedor').setAttribute('src', item.contact)
+        /*
+        var miHipervinculo = document.getElementById("miHipervinculo");
+        miHipervinculo.href = "https://www.ejemplo.com"; */
+
         
         const clone = cardTop.cloneNode(true)
         fragment.appendChild(clone)

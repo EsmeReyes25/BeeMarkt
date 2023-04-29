@@ -10,24 +10,32 @@ html {
 /*Encabezado*/
 
 .header {
-    padding: 2rem 0;
     position: fixed;
-    left: 0;
-    top: 0;
-    /**right: 0;*/
     width: 100%;
-    margin-bottom: 2rem;
-}
-
-.container {
-    height: 5rem;
-    /* background-color: aquamarine; */
+    transition: 0.7s;
+    z-index: 10;
+    height: 10rem;
     display: flex;
     align-items: center;
     padding: 2rem;
-    margin: 3rem;
-    justify-content: space-evenly;
-    background-color: white;
+    justify-content: space-around;
+    background-color: #2e3236;
+}
+
+header.abajo {
+    background: #fff;
+    padding: 15px 20px;
+}
+
+.container {
+    position: relative;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    justify-content: space-around;
+    background-color: aquamarine;
+    width: 100%;
 }
 
 .icono {
@@ -55,6 +63,11 @@ html {
 
 .iconoBuscar {
     font-size: 3rem;
+    color: white;
+}
+
+header.abajo .iconoBuscar  {
+    color: black;
 }
 
 .producto {
@@ -73,7 +86,7 @@ html {
     border: 0;
     padding: 0.5rem;
     margin-top: 1rem;
-    background-color: #e84624;
+    background-color: #e8a726;
     transition: 0.5s;
 }
 
@@ -139,20 +152,29 @@ addProduct:hover {
 
 .main {
     padding-top: 12rem;
+    background-color: #2e3236;
 }
 
 .carrusel {
-    margin-top: 2rem;
-    margin-bottom: 30rem;
-    height: 10rem;
+    position: relative;
+    height: 50rem;
+    width: 100vw;
 }
 
 .carusel-img {
-    height: 35.5rem;
+    height: 48rem;
+}
+
+.carr-imagenes {
+    width: 80vw;
 }
 
 /*SECCION DE PRODUCTOS*/
 .productos {
     height: 4.5rem;
     background-color: blueviolet;
+}
+
+.product-content {
+    margin: 1rem;
 }
