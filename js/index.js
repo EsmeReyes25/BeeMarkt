@@ -4,7 +4,56 @@ const formularioInsert = document.querySelector('#formularioInsert').content // 
 const form = formularioInsert.querySelector(".formulario") // Selects the form from the template
 const btnAgregar = formularioInsert.querySelector('.btnAdd') // Selects the button to add products
 
+// Carga de tarjetas
+const cardTop = document.querySelector('#products-top').content
+const contenido = document.querySelector('#contenido-productos')
+const fragment = document.createDocumentFragment()
+const Buscar = document.getElementById('buscador') // ******PENDIENTE******
 let products = []
+
+// Change color effect on header
+window.addEventListener("scroll", function() {
+    var header = document.querySelector("header")
+    header.classList.toggle("abajo", window.scrollY > 0)
+})
+
+// Funcion que muestra las tarjetas
+const creaCards = () => {
+    products.forEach((item) => {
+        console.log(item)
+        cardTop.querySelector('img').setAttribute('src', item.image_url)
+        cardTop.querySelector('.nombreProducto').textContent = item.product_name
+        cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
+        cardTop.querySelector('.categoriaProducto').textContent = 'Categoría: ' + item.category
+        cardTop.querySelector('.diasVenta').textContent = 'Días de venta: ' + item.sale_days
+        cardTop.querySelector('.horasVenta').textContent = 'Horas de venta: ' + item.sale_hours
+        cardTop.querySelector('.nombreVendedor').textContent = 'Nombre del vendedor: ' + item.vendor_name
+        
+        cardTop.querySelector('.contactoVendedor').textContent = item.contact
+        //cardTop.querySelector('.contactoVendedor').setAttribute('src', item.contact)
+        /*
+        var miHipervinculo = document.getElementById("miHipervinculo");
+        miHipervinculo.href = "https://www.ejemplo.com"; */
+
+        
+        const clone = cardTop.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    contenido.appendChild(fragment)
+}
+
+// The main function prevents any method from being executed if the products in the list have not been loaded yet
+const main = () => {
+    // Aquí va la llamada a la función para imprimir tarjetas
+    creaCards()
+
+    // Aquí van las llamadas a las demás funciones y listeners
+    btnAgregar.addEventListener('click', e => {
+        e.preventDefault(); // Evita que se refresque la página
+        insertProduct()
+    })
+
+}
 
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
 document.addEventListener('DOMContentLoaded', async (e) => {
@@ -23,18 +72,6 @@ inputCorreo.addEventListener("input", () => {
       btnVerificar.disabled = true;
     }
   });
-
-// The main function prevents any method from being executed if the products in the list have not been loaded yet
-const main = () => {
-    // Aquí va la llamada a la función para imprimir tarjetas
-
-    // Aquí van las llamadas a las demás funciones y listeners
-    btnAgregar.addEventListener('click', e => {
-        e.preventDefault(); // Evita que se refresque la página
-        insertProduct()
-    })
-
-}
 
 // ---------------- Aquí van las definiciones de las funciones ------------------
 // Function to add a product
@@ -58,3 +95,4 @@ const insertProduct = async () => {
 const deleteProd = async (prod) => {
     await deleteProduct(prod)
 }
+
