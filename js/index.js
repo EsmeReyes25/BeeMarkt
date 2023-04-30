@@ -8,7 +8,7 @@ const btnAgregar = formularioInsert.querySelector('.btnAdd') // Selects the butt
 const cardTop = document.querySelector('#products-top').content
 const contenido = document.querySelector('#contenido-productos')
 const fragment = document.createDocumentFragment()
-const Buscar = document.getElementById('buscador') // ******PENDIENTE******
+const Buscar = document.getElementById('buscador') 
 let products = []
 
 // Change color effect on header
@@ -18,9 +18,10 @@ window.addEventListener("scroll", function() {
 })
 
 // Funcion que muestra las tarjetas
-const creaCards = () => {
-    products.forEach((item) => {
-        console.log(item)
+const creaCards = (productos) => {
+    contenido.innerHTML = ""
+    productos.forEach((item) => {
+        //console.log(item)
         cardTop.querySelector('img').setAttribute('src', item.image_url)
         cardTop.querySelector('.nombreProducto').textContent = item.product_name
         cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -45,13 +46,20 @@ const creaCards = () => {
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
 const main = () => {
     // Aquí va la llamada a la función para imprimir tarjetas
-    creaCards()
+    creaCards(products)
 
     // Aquí van las llamadas a las demás funciones y listeners
     btnAgregar.addEventListener('click', e => {
         e.preventDefault(); // Evita que se refresque la página
         insertProduct()
     })
+
+    //Function to search a product
+    Buscar.addEventListener('keyup', () => {
+        let temp = []
+        temp = products.filter(product => product.product_name.toLowerCase().includes(Buscar.value.toLowerCase()))
+        creaCards(temp)
+    }) 
 
 }
 
@@ -95,4 +103,3 @@ const insertProduct = async () => {
 const deleteProd = async (prod) => {
     await deleteProduct(prod)
 }
-
