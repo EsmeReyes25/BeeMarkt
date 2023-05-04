@@ -215,19 +215,6 @@ let nextAction = (leftPosition, trackWidth, listWidth, carruselWidth, track) => 
     }
 }
 
-
-
-inputCorreo.addEventListener("input", () => {
-    const correo = inputCorreo.value;
-    const regex = /^[a-zA-Z0-9._%+-]+@ugto\.mx$/i;
-  
-    if (regex.test(correo)) {
-      btnVerificar.disabled = false;
-    } else {
-      btnVerificar.disabled = true;
-    }
-  });
-
 // ---------------- Aquí van las definiciones de las funciones ------------------
 // Function to add a product
 const insertProduct = async () => {

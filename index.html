@@ -23,7 +23,7 @@
             <div class="cuadro">
                 <img src="./images/logo.png" alt="" class="logo" width="75%" height="70%">
                 <label> Verifique que sea de la UG</label>
-                <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba su correo universitario" onclick="validarCorreo()">
+                <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba su correo universitario">
                 <button class="btnVerificar" id="btnVerificar" onclick="validarCorreo()">Ingresar</button>
             </div>
         </div>
@@ -31,6 +31,17 @@
 
       
     <script>
+        var inputCorreo = document.getElementById("inputCorreo")
+        inputCorreo.addEventListener("input", () => {
+            const correo = inputCorreo.value;
+            const regex = /^[a-zA-Z0-9._%+-]+@ugto\.mx$/i;
+        
+            if (regex.test(correo)) {
+            btnVerificar.disabled = false;
+            } else {
+            btnVerificar.disabled = true;
+            }
+        });
         function validarCorreo() {
             var inputCorreo = document.getElementById("inputCorreo")
             var correo = inputCorreo.value.trim()
@@ -38,7 +49,7 @@
 
             if (regex.test(correo)) {
                 console.log("Correo válido")
-                location.href='principal.html'             
+                location.href='principal.html'           
             } else {
                 console.log("Correo no válido")
             }
