@@ -50,15 +50,14 @@ const main = () => {
     creaCardsOtros()
 
     // Aquí van las llamadas a las demás funciones y listeners que necesitan de productos[]
-
+    btnAgregar.addEventListener('click', e => {
+        e.preventDefault(); // Evita que se refresque la página
+        insertProduct()
+        // Aquí se debe limpiar el contenido de la pantalla y volver a llamar a main() para actualizar los productos
+    })
 }
 
 // ---------------- Aquí van las definiciones de las funciones (y listeners que no dependen de productos[]) ------------------
-btnAgregar.addEventListener('click', e => {
-    e.preventDefault(); // Evita que se refresque la página
-    insertProduct()
-    // Aquí se debe limpiar el contenido de la pantalla y volver a llamar a main() para actualizar los productos
-})
 // Funciones para mostrar las tarjetas
 const creaCardsOtros = () => {
     products.forEach((item) => {
