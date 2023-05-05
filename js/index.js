@@ -53,7 +53,7 @@ const main = () => {
     btnAgregar.addEventListener('click', e => {
         e.preventDefault(); // Evita que se refresque la página
         insertProduct()
-        // Aquí se debe limpiar el contenido de la pantalla y volver a llamar a main() para actualizar los productos
+        // Aquí se debe limpiar el contenido de la pantalla y volver a imprimir las tarjetas para actualizar los productos
     })
 }
 
