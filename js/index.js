@@ -33,10 +33,11 @@ const fragment_otros = document.createDocumentFragment()
 
 
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
-document.addEventListener('DOMContentLoaded', async (e) => {
-    products = await getProducts()
-    console.log('productos:', products)
-    main()
+document.addEventListener('DOMContentLoaded', e => {
+    //products = await getProducts()
+    //console.log('productos:', products)
+    //main()
+    loadProducts()
 })
 
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
@@ -53,8 +54,15 @@ const main = () => {
     btnAgregar.addEventListener('click', e => {
         e.preventDefault(); // Evita que se refresque la página
         insertProduct()
-        // Aquí se debe limpiar el contenido de la pantalla y volver a imprimir las tarjetas para actualizar los productos
+        // Aquí se debe limpiar el contenido de la pantalla
+        loadProducts()
     })
+}
+
+const loadProducts = async () => {
+    products = await getProducts()
+    console.log('productos:', products)
+    main()
 }
 
 // ---------------- Aquí van las definiciones de las funciones (y listeners que no dependen de productos[]) ------------------
