@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="./js/connection.js"></script>
-    <script type="module" src="./js/index.js"></script>
     <link rel="icon" href="/images/logo.ico"></link>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,13 +19,24 @@
                 <img src="./images/logo.png" alt="" class="logo" width="75%" height="70%">
                 <label> Verifique que sea de la UG</label>
                 <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba su correo universitario" onclick="validarCorreo()">
-                <button class="btnVerificar" id="btnVerificar" onclick="location.href='gera.html'">Ingresar</button>
+                <button type="submit" class="btnVerificar btn-warning" id="btnVerificar" onclick="location.href='gera.html'">Ingresar</button>
             </div>
         </div>
     </div>
 
       
     <script>
+        var inputCorreo = document.getElementById("inputCorreo")
+        inputCorreo.addEventListener("input", () => {
+            const correo = inputCorreo.value;
+            const regex = /^[a-zA-Z0-9._%+-]+@ugto\.mx$/i;
+        
+            if (regex.test(correo)) {
+            btnVerificar.disabled = false;
+            } else {
+            btnVerificar.disabled = true;
+            }
+        });
         function validarCorreo() {
             var inputCorreo = document.getElementById("inputCorreo")
             var correo = inputCorreo.value.trim()
@@ -43,5 +52,7 @@
             }
         }
     </script>
+    <script type="module" src="./js/connection.js"></script>
+    <script type="module" src="./js/index.js"></script>
 </body>
 </html>

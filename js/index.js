@@ -1,8 +1,8 @@
 import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imports the querys to get, save and delete products
 
-const formularioInsert = document.querySelector('#formularioInsert').content // Gets the form template
-const form = formularioInsert.querySelector(".formulario") // Selects the form from the template
-const btnAgregar = formularioInsert.querySelector('.btnAdd') // Selects the button to add products
+// Form to insert a new product 
+const form = document.querySelector(".formulario") // Selects the form
+const btnAgregar = document.querySelector('.btn-agregar-producto') // Selects the button to add products (there needs to add an id to the button in the principal.html)
 
 // Carga de tarjetas
 const cardTop = document.querySelector('#products-top').content
@@ -11,6 +11,128 @@ const fragment = document.createDocumentFragment()
 const Buscar = document.getElementById('buscador') 
 let products = []
 
+//Seccion Comida
+const contenido_comida = document.querySelector('#contenido-comida')
+const fragment_comida = document.createDocumentFragment()
+
+//Seccion Bebidas
+const contenido_bebidas = document.querySelector('#contenido-bebidas')
+const fragment_bebidas = document.createDocumentFragment()
+
+// Seccion para otros
+const contenido_otros = document.querySelector('#contenido-otros')
+const fragment_otros = document.createDocumentFragment()
+
+
+// Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
+document.addEventListener('DOMContentLoaded', e => {
+    //products = await getProducts()
+    //console.log('productos:', products)
+    //main()
+    loadProducts()
+})
+
+// The main function prevents any method from being executed if the products in the list have not been loaded yet
+const main = () => {
+    // Aquí va la llamada a la función para imprimir tarjetas
+    creaCards()
+    creaCardsComida()
+    creaCardsBebidas()
+    creaCardsOtros()
+
+    // Aquí van las llamadas a las demás funciones y listeners que necesitan de productos[]
+    btnAgregar.addEventListener('click', e => {
+        e.preventDefault(); // Evita que se refresque la página
+        insertProduct()
+        // Aquí se debe limpiar el contenido de la pantalla
+        loadProducts()
+    })
+}
+
+const loadProducts = async () => {
+    products = await getProducts()
+    console.log('productos:', products)
+    main()
+}
+
+// ---------------- Aquí van las definiciones de las funciones (y listeners que no dependen de productos[]) ------------------
+// Funciones para mostrar las tarjetas
+const creaCardsOtros = () => {
+    products.forEach((item) => {
+        if (item.category === 'otros') {
+            console.log(item)
+            cardTop.querySelector('img').setAttribute('src', item.image_url)
+            cardTop.querySelector('.nombreProducto').textContent = item.product_name
+            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
+            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            cardTop.querySelector('.diasVenta').textContent = item.sale_days
+            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
+            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
+            const clone = cardTop.cloneNode(true)
+            fragment_otros.appendChild(clone)
+        }
+    })
+    contenido_otros.appendChild(fragment_otros)
+}
+
+const creaCardsBebidas = () => {
+    products.forEach((item) => {
+        if (item.category === 'bebidas') {
+            console.log(item)
+            cardTop.querySelector('img').setAttribute('src', item.image_url)
+            cardTop.querySelector('.nombreProducto').textContent = item.product_name
+            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
+            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            cardTop.querySelector('.diasVenta').textContent = item.sale_days
+            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
+            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
+            const clone = cardTop.cloneNode(true)
+            fragment_bebidas.appendChild(clone)
+        }
+    })
+    contenido_bebidas.appendChild(fragment_bebidas)
+}
+
+const creaCardsComida = () => {
+    products.forEach((item) => {
+        if (item.category === 'comida') {
+            console.log(item)
+            cardTop.querySelector('img').setAttribute('src', item.image_url)
+            cardTop.querySelector('.nombreProducto').textContent = item.product_name
+            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
+            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            cardTop.querySelector('.diasVenta').textContent = item.sale_days
+            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
+            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
+            const clone = cardTop.cloneNode(true)
+            fragment_comida.appendChild(clone)
+        }
+    })
+    contenido_comida.appendChild(fragment_comida)
+}
+
+const creaCards = () => {
+    products.forEach((item) => {
+        if (item.category === 'dulces') {
+            console.log(item)
+            cardTop.querySelector('img').setAttribute('src', item.image_url)
+            cardTop.querySelector('.nombreProducto').textContent = item.product_name
+            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
+            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            cardTop.querySelector('.diasVenta').textContent = item.sale_days
+            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
+            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
+            const clone = cardTop.cloneNode(true)
+            fragment.appendChild(clone)
+        }
+    })
+    contenido.appendChild(fragment)
+}
+
 // Change color effect on header
 window.addEventListener("scroll", function() {
     var header = document.querySelector("header")
@@ -18,6 +140,7 @@ window.addEventListener("scroll", function() {
 })
 
 // Funcion que muestra las tarjetas
+/*
 const creaCards = (productos) => {
     contenido.innerHTML = ""
     productos.forEach((item) => {
@@ -34,7 +157,7 @@ const creaCards = (productos) => {
         //cardTop.querySelector('.contactoVendedor').setAttribute('src', item.contact)
         /*
         var miHipervinculo = document.getElementById("miHipervinculo");
-        miHipervinculo.href = "https://www.ejemplo.com"; */
+        miHipervinculo.href = "https://www.ejemplo.com"; 
 
         
         const clone = cardTop.cloneNode(true)
@@ -42,46 +165,22 @@ const creaCards = (productos) => {
     })
     contenido.appendChild(fragment)
 }
+*/
 
-// The main function prevents any method from being executed if the products in the list have not been loaded yet
-const main = () => {
-    // Aquí va la llamada a la función para imprimir tarjetas
-    creaCards(products)
 
-    // Aquí van las llamadas a las demás funciones y listeners
-    btnAgregar.addEventListener('click', e => {
-        e.preventDefault(); // Evita que se refresque la página
-        insertProduct()
-    })
 
-    //Function to search a product
-    Buscar.addEventListener('keyup', () => {
-        let temp = []
-        temp = products.filter(product => product.product_name.toLowerCase().includes(Buscar.value.toLowerCase()))
-        creaCards(temp)
-    }) 
-
+let prevAction = (leftPosition, carruselWidth, track) => {
+    if (leftPosition > 0) {
+        track.style.left = `${-1 * (leftPosition - carruselWidth)}px`
+    }
 }
 
-// Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
-document.addEventListener('DOMContentLoaded', async (e) => {
-    products = await getProducts()
-    console.log('productos:', products)
-    main()
-})
-
-inputCorreo.addEventListener("input", () => {
-    const correo = inputCorreo.value;
-    const regex = /^[a-zA-Z0-9._%+-]+@ugto\.mx$/i;
-  
-    if (regex.test(correo)) {
-      btnVerificar.disabled = false;
-    } else {
-      btnVerificar.disabled = true;
+let nextAction = (leftPosition, trackWidth, listWidth, carruselWidth, track) => {
+    if (leftPosition < (trackWidth - listWidth)) {
+        track.style.left = `${-1 * (leftPosition + carruselWidth)}px`
     }
-  });
+}
 
-// ---------------- Aquí van las definiciones de las funciones ------------------
 // Function to add a product
 const insertProduct = async () => {
     // Data to be added to the database
@@ -98,6 +197,7 @@ const insertProduct = async () => {
     await saveProduct(sendData)
     form.reset()
 }
+
 
 // Function to delete a product
 const deleteProd = async (prod) => {
