@@ -4,12 +4,15 @@ const formularioInsert = document.querySelector('#formularioInsert').content // 
 const form = formularioInsert.querySelector(".formulario") // Selects the form from the template
 const btnAgregar = formularioInsert.querySelector('.btnAdd') // Selects the button to add products
 
+
+
 // Carga de tarjetas
 const cardTop = document.querySelector('#products-top').content
 const contenido = document.querySelector('#contenido-productos')
 const fragment = document.createDocumentFragment()
 const Buscar = document.getElementById('buscador') // ******PENDIENTE******
 let products = []
+// let 
 
 //Seccion Comida
 const contenido_comida = document.querySelector('#contenido-comida')
@@ -173,7 +176,10 @@ const main = () => {
         insertProduct()
     })
 
-}
+     // Cierra el formulario
+     document.querySelector('.modal-backdrop').remove();
+     document.querySelector('body').classList.remove('modal-open');
+};
 
 
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
@@ -217,7 +223,7 @@ let nextAction = (leftPosition, trackWidth, listWidth, carruselWidth, track) => 
 
 // ---------------- Aquí van las definiciones de las funciones ------------------
 // Function to add a product
-const insertProduct = async () => {
+/*const insertProduct = async () => {
     // Data to be added to the database
     const sendData = {
         category: form.categ.value,
@@ -231,7 +237,38 @@ const insertProduct = async () => {
     }
     await saveProduct(sendData)
     form.reset()
-}
+}*/const insertProduct = async () => {
+    // Data to be added to the database
+    const sendData = {
+        category: form.categ.value,
+        contact: form.contacto.value,
+        image_url: form.imgUrl.value,
+        price: form.precio.value,
+        product_name: form.productName.value,
+        sale_days: form.dias.value,
+        sale_hours: form.horas.value,
+        vendor_name: form.vendorName.value
+    };
+
+    // Envía los datos al servidor
+    const response = await fetch('https://mi-servidor.com/api/products', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sendData)
+    });
+
+    // Espera la respuesta del servidor
+    const data = await response.json();
+
+    // Agrega el nuevo producto a la lista de productos
+    products.push(data);
+
+    // Imprime todas las tarjetas de nuevo
+    creaCards();
+};
+
 
 
 // Function to delete a product
@@ -240,3 +277,4 @@ const deleteProd = async (prod) => {
 }
 
 
+//
