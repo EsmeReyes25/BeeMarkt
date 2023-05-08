@@ -2,13 +2,13 @@ import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imp
 
 // Form to insert a new product 
 const form = document.querySelector(".formulario") // Selects the form
-const btnAgregar = document.querySelector('.btnAdd') // Selects the button to add products (there needs to add an id to the button in the principal.html)
+const btnAgregar = document.querySelector('.btn-agregar-producto') // Selects the button to add products (there needs to add an id to the button in the principal.html)
 
 // Carga de tarjetas
 const cardTop = document.querySelector('#products-top').content
 const contenido = document.querySelector('#contenido-productos')
 const fragment = document.createDocumentFragment()
-const Buscar = document.getElementById('buscador') // ******PENDIENTE******
+const Buscar = document.getElementById('buscador') 
 let products = []
 
 //Seccion Comida
@@ -18,14 +18,6 @@ const fragment_comida = document.createDocumentFragment()
 //Seccion Bebidas
 const contenido_bebidas = document.querySelector('#contenido-bebidas')
 const fragment_bebidas = document.createDocumentFragment()
-
-//Seccion Papelería
-const contenido_papeleria = document.querySelector('#contenido-papeleria')
-const fragment_papeleria = document.createDocumentFragment()
-
-// Seccion Accesorios
-const contenido_accesorios = document.querySelector('#contenido-accesorios')
-const fragment_accesorios = document.createDocumentFragment()
 
 // Seccion para otros
 const contenido_otros = document.querySelector('#contenido-otros')
@@ -46,8 +38,6 @@ const main = () => {
     creaCards()
     creaCardsComida()
     creaCardsBebidas()
-    creaCardsPapeleria()
-    creaCardsAccesorios()
     creaCardsOtros()
 
     // Aquí van las llamadas a las demás funciones y listeners que necesitan de productos[]
@@ -78,50 +68,12 @@ const creaCardsOtros = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
             fragment_otros.appendChild(clone)
         }
     })
     contenido_otros.appendChild(fragment_otros)
-}
-
-const creaCardsAccesorios = () => {
-    products.forEach((item) => {
-        if (item.category === 'accesorios') {
-            console.log(item)
-            cardTop.querySelector('img').setAttribute('src', item.image_url)
-            cardTop.querySelector('.nombreProducto').textContent = item.product_name
-            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-            cardTop.querySelector('.categoriaProducto').textContent = item.category
-            cardTop.querySelector('.diasVenta').textContent = item.sale_days
-            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
-            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
-            const clone = cardTop.cloneNode(true)
-            fragment_accesorios.appendChild(clone)
-        }
-    })
-    contenido_accesorios.appendChild(fragment_accesorios)
-}
-
-const creaCardsPapeleria = () => {
-    products.forEach((item) => {
-        if (item.category === 'papelería') {
-            console.log(item)
-            cardTop.querySelector('img').setAttribute('src', item.image_url)
-            cardTop.querySelector('.nombreProducto').textContent = item.product_name
-            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-            cardTop.querySelector('.categoriaProducto').textContent = item.category
-            cardTop.querySelector('.diasVenta').textContent = item.sale_days
-            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
-            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
-            const clone = cardTop.cloneNode(true)
-            fragment_papeleria.appendChild(clone)
-        }
-    })
-    contenido_papeleria.appendChild(fragment_papeleria)
 }
 
 const creaCardsBebidas = () => {
@@ -135,7 +87,7 @@ const creaCardsBebidas = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
             fragment_bebidas.appendChild(clone)
         }
@@ -154,7 +106,7 @@ const creaCardsComida = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
             fragment_comida.appendChild(clone)
         }
@@ -173,8 +125,7 @@ const creaCards = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
-            cardTop.querySelector('a').setAttribute('href', item.contact)
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
             fragment.appendChild(clone)
         }
@@ -207,6 +158,36 @@ App.prototype.processingButton = function (event) {
     track.style.left == "" ? leftPosition = track.style.left = 0 : leftPosition = parseFloat(track.style.left.slice(0, -2) * -1)
     btn.dataset.button == "button-prev" ? prevAction(leftPosition, carruselWidth, track) : nextAction(leftPosition, trackWidth, listWidth, carruselWidth, track)
 }
+
+// Funcion que muestra las tarjetas
+/*
+const creaCards = (productos) => {
+    contenido.innerHTML = ""
+    productos.forEach((item) => {
+        //console.log(item)
+        cardTop.querySelector('img').setAttribute('src', item.image_url)
+        cardTop.querySelector('.nombreProducto').textContent = item.product_name
+        cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
+        cardTop.querySelector('.categoriaProducto').textContent = 'Categoría: ' + item.category
+        cardTop.querySelector('.diasVenta').textContent = 'Días de venta: ' + item.sale_days
+        cardTop.querySelector('.horasVenta').textContent = 'Horas de venta: ' + item.sale_hours
+        cardTop.querySelector('.nombreVendedor').textContent = 'Nombre del vendedor: ' + item.vendor_name
+        
+        cardTop.querySelector('.contactoVendedor').textContent = item.contact
+        //cardTop.querySelector('.contactoVendedor').setAttribute('src', item.contact)
+        /*
+        var miHipervinculo = document.getElementById("miHipervinculo");
+        miHipervinculo.href = "https://www.ejemplo.com"; 
+
+        
+        const clone = cardTop.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    contenido.appendChild(fragment)
+}
+*/
+
+
 
 let prevAction = (leftPosition, carruselWidth, track) => {
     if (leftPosition > 0) {
@@ -242,5 +223,3 @@ const insertProduct = async () => {
 const deleteProd = async (prod) => {
     await deleteProduct(prod)
 }
-
-

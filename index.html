@@ -11,9 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 
-    <title>BeeMarkt</title>
-</head>
-
 <body>
     <div class="container">
         <div class="muestra"></div>
@@ -21,8 +18,8 @@
             <div class="cuadro">
                 <img src="./images/logo.png" alt="" class="logo" width="75%" height="70%">
                 <label> Verifique que sea de la UG</label>
-                <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba su correo universitario">
-                <button class="btnVerificar" id="btnVerificar" onclick="validarCorreo()">Ingresar</button>
+                <input type="text" name="" id="inputCorreo" class="inputCorreo" placeholder="Escriba su correo universitario" onclick="validarCorreo()">
+                <button type="submit" class="btnVerificar btn-warning" id="btnVerificar" onclick="location.href='gera.html'">Ingresar</button>
             </div>
         </div>
     </div>
@@ -47,9 +44,11 @@
 
             if (regex.test(correo)) {
                 console.log("Correo válido")
-                location.href='principal.html'           
+
+             
             } else {
                 console.log("Correo no válido")
+
             }
         }
     </script>

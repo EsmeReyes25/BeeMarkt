@@ -75,6 +75,12 @@ button {
     margin: 1rem 0;
     border-radius: 10px;
     font-family: 'Comfortaa', cursive;
+    padding-left: 0.4rem;
+    width: 50%;
+    height: 3rem;
+    background-color: #ffd100ba;
+    outline: none;
+    border-color: #d1b01a;
 }
 
 input {
@@ -82,6 +88,8 @@ input {
     border-radius: 10px;
     background-color: #f3f3f3;
     font-family: 'Comfortaa', cursive;
+    height: 2rem;
+    outline: none;
 }
   
 .inputCorreo{
