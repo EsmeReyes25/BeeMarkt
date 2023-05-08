@@ -2,7 +2,7 @@ import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imp
 
 // Form to insert a new product 
 const form = document.querySelector(".formulario") // Selects the form
-const btnAgregar = document.querySelector('.btn-agregar-producto') // Selects the button to add products (there needs to add an id to the button in the principal.html)
+const btnAgregar = document.querySelector('.btnAdd') // Selects the button to add products (there needs to add an id to the button in the principal.html)
 
 // Carga de tarjetas
 const cardTop = document.querySelector('#products-top').content
