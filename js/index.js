@@ -1,8 +1,8 @@
 import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imports the querys to get, save and delete products
 
-const formularioInsert = document.querySelector('#formularioInsert').content // Gets the form template
-const form = formularioInsert.querySelector(".formulario") // Selects the form from the template
-const btnAgregar = formularioInsert.querySelector('.btnAdd') // Selects the button to add products
+// Form to insert a new product 
+const form = document.querySelector(".formulario") // Selects the form
+const btnAgregar = document.querySelector('.btnAdd') // Selects the button to add products (there needs to add an id to the button in the principal.html)
 
 
 
@@ -35,14 +35,44 @@ const contenido_otros = document.querySelector('#contenido-otros')
 const fragment_otros = document.createDocumentFragment()
 
 
-// Change color effect on header
-window.addEventListener("scroll", function() {
-    var header = document.querySelector("header")
-    header.classList.toggle("abajo", window.scrollY > 0)
+// Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
+document.addEventListener('DOMContentLoaded', e => {
+    //products = await getProducts()
+    //console.log('productos:', products)
+    //main()
+    loadProducts()
 })
 
-// Funciones para mostrar las tarjetas
+// The main function prevents any method from being executed if the products in the list have not been loaded yet
+const main = () => {
+    // Aquí va la llamada a la función para imprimir tarjetas
+    creaCards()
+    creaCardsComida()
+    creaCardsBebidas()
+    creaCardsPapeleria()
+    creaCardsAccesorios()
+    creaCardsOtros()
 
+    // Aquí van las llamadas a las demás funciones y listeners que necesitan de productos[]
+    btnAgregar.addEventListener('click', e => {
+        e.preventDefault(); // Evita que se refresque la página
+        insertProduct()
+        // Aquí se debe limpiar el contenido de la pantalla
+        cardTop.innerHTML = ''
+        loadProducts()
+
+        
+    })
+}
+
+const loadProducts = async () => {
+    products = await getProducts()
+    console.log('productos:', products)
+    main()
+}
+
+// ---------------- Aquí van las definiciones de las funciones (y listeners que no dependen de productos[]) ------------------
+// Funciones para mostrar las tarjetas
 const creaCardsOtros = () => {
     products.forEach((item) => {
         if (item.category === 'otros') {
@@ -159,34 +189,10 @@ const creaCards = () => {
 }
 
 
-
-// The main function prevents any method from being executed if the products in the list have not been loaded yet
-const main = () => {
-    // Aquí va la llamada a la función para imprimir tarjetas
-    creaCards()
-    creaCardsComida()
-    creaCardsBebidas()
-    creaCardsPapeleria()
-    creaCardsAccesorios()
-    creaCardsOtros()
-
-    // Aquí van las llamadas a las demás funciones y listeners
-    btnAgregar.addEventListener('click', e => {
-        e.preventDefault(); // Evita que se refresque la página
-        insertProduct()
-    })
-
-     // Cierra el formulario
-     document.querySelector('.modal-backdrop').remove();
-     document.querySelector('body').classList.remove('modal-open');
-};
-
-
-// Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
-document.addEventListener('DOMContentLoaded', async (e) => {
-    products = await getProducts()
-    console.log('productos:', products)
-    main()
+// Change color effect on header
+window.addEventListener("scroll", function() {
+    var header = document.querySelector("header")
+    header.classList.toggle("abajo", window.scrollY > 0)
 })
 
 // Funciones para el menu de carrusel
@@ -221,7 +227,6 @@ let nextAction = (leftPosition, trackWidth, listWidth, carruselWidth, track) => 
     }
 }
 
-// ---------------- Aquí van las definiciones de las funciones ------------------
 // Function to add a product
 /*const insertProduct = async () => {
     // Data to be added to the database
@@ -234,10 +239,8 @@ let nextAction = (leftPosition, trackWidth, listWidth, carruselWidth, track) => 
         sale_days: form.dias.value,
         sale_hours: form.horas.value,
         vendor_name: form.vendorName.value
-    }
-    await saveProduct(sendData)
-    form.reset()
-}*/const insertProduct = async () => {
+    }*/
+const insertProduct = async () => {
     // Data to be added to the database
     const sendData = {
         category: form.categ.value,
@@ -248,33 +251,26 @@ let nextAction = (leftPosition, trackWidth, listWidth, carruselWidth, track) => 
         sale_days: form.dias.value,
         sale_hours: form.horas.value,
         vendor_name: form.vendorName.value
+        
     };
+    await saveProduct(sendData)
+    form.reset()
 
-    // Envía los datos al servidor
-    const response = await fetch('https://mi-servidor.com/api/products', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(sendData)
-    });
-
-    // Espera la respuesta del servidor
-    const data = await response.json();
-
-    // Agrega el nuevo producto a la lista de productos
-    products.push(data);
-
-    // Imprime todas las tarjetas de nuevo
-    creaCards();
 };
 
 
-
+/*
 // Function to delete a product
 const deleteProd = async (prod) => {
     await deleteProduct(prod)
+}*/
+
+// Function to delete a product
+const deleteProd = async (prod) => {
+    // Remove the product from the UI
+    const productCard = document.getElementById(prod)
+    productCard.remove()
+
+    // Remove the product from the database
+    await deleteProduct(prod)
 }
-
-
-//
