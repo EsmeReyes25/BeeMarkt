@@ -26,9 +26,6 @@ const fragment_otros = document.createDocumentFragment()
 
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
 document.addEventListener('DOMContentLoaded', e => {
-    //products = await getProducts()
-    //console.log('productos:', products)
-    //main()
     loadProducts()
 })
 
@@ -158,36 +155,6 @@ App.prototype.processingButton = function (event) {
     track.style.left == "" ? leftPosition = track.style.left = 0 : leftPosition = parseFloat(track.style.left.slice(0, -2) * -1)
     btn.dataset.button == "button-prev" ? prevAction(leftPosition, carruselWidth, track) : nextAction(leftPosition, trackWidth, listWidth, carruselWidth, track)
 }
-
-// Funcion que muestra las tarjetas
-/*
-const creaCards = (productos) => {
-    contenido.innerHTML = ""
-    productos.forEach((item) => {
-        //console.log(item)
-        cardTop.querySelector('img').setAttribute('src', item.image_url)
-        cardTop.querySelector('.nombreProducto').textContent = item.product_name
-        cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-        cardTop.querySelector('.categoriaProducto').textContent = 'Categoría: ' + item.category
-        cardTop.querySelector('.diasVenta').textContent = 'Días de venta: ' + item.sale_days
-        cardTop.querySelector('.horasVenta').textContent = 'Horas de venta: ' + item.sale_hours
-        cardTop.querySelector('.nombreVendedor').textContent = 'Nombre del vendedor: ' + item.vendor_name
-        
-        cardTop.querySelector('.contactoVendedor').textContent = item.contact
-        //cardTop.querySelector('.contactoVendedor').setAttribute('src', item.contact)
-        /*
-        var miHipervinculo = document.getElementById("miHipervinculo");
-        miHipervinculo.href = "https://www.ejemplo.com"; 
-
-        
-        const clone = cardTop.cloneNode(true)
-        fragment.appendChild(clone)
-    })
-    contenido.appendChild(fragment)
-}
-*/
-
-
 
 let prevAction = (leftPosition, carruselWidth, track) => {
     if (leftPosition > 0) {
