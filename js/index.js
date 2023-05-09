@@ -23,6 +23,7 @@ const fragment_bebidas = document.createDocumentFragment()
 const contenido_otros = document.querySelector('#contenido-otros')
 const fragment_otros = document.createDocumentFragment()
 
+const productosAll = document.querySelector('#productosAll')
 
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
 document.addEventListener('DOMContentLoaded', e => {
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', e => {
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
 const main = () => {
     // Aquí va la llamada a la función para imprimir tarjetas
-    creaCards()
+    creaCards(products)
     creaCardsComida()
     creaCardsBebidas()
     creaCardsOtros()
@@ -47,6 +48,16 @@ const main = () => {
         // Aquí se debe limpiar el contenido de la pantalla
         loadProducts()
     })
+
+    //Función para buscar un producto
+    Buscar.addEventListener('keyup', () => {
+        console.log('Si llega aqui')
+        let temp = []
+        temp = products.filter(producto => producto.product_name.toLowerCase().includes(Buscar.value.toLowerCase()))
+       creaCardsALL(temp)
+       console.log('temp=>', temp)
+
+    }) 
 }
 
 const loadProducts = async () => {
@@ -160,32 +171,27 @@ App.prototype.processingButton = function (event) {
 }
 
 // Funcion que muestra las tarjetas
-/*
-const creaCards = (productos) => {
-    contenido.innerHTML = ""
+
+const creaCardsALL = (productos) => {
+    productosAll.innerHTML = ""
     productos.forEach((item) => {
         //console.log(item)
-        cardTop.querySelector('img').setAttribute('src', item.image_url)
-        cardTop.querySelector('.nombreProducto').textContent = item.product_name
-        cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-        cardTop.querySelector('.categoriaProducto').textContent = 'Categoría: ' + item.category
-        cardTop.querySelector('.diasVenta').textContent = 'Días de venta: ' + item.sale_days
-        cardTop.querySelector('.horasVenta').textContent = 'Horas de venta: ' + item.sale_hours
-        cardTop.querySelector('.nombreVendedor').textContent = 'Nombre del vendedor: ' + item.vendor_name
-        
-        cardTop.querySelector('.contactoVendedor').textContent = item.contact
-        //cardTop.querySelector('.contactoVendedor').setAttribute('src', item.contact)
-        /*
-        var miHipervinculo = document.getElementById("miHipervinculo");
-        miHipervinculo.href = "https://www.ejemplo.com"; 
-
-        
-        const clone = cardTop.cloneNode(true)
-        fragment.appendChild(clone)
+        console.log(item)
+            cardTop.querySelector('img').setAttribute('src', item.image_url)
+            cardTop.querySelector('.nombreProducto').textContent = item.product_name
+            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
+            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            cardTop.querySelector('.diasVenta').textContent = item.sale_days
+            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
+            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
+            const clone = cardTop.cloneNode(true)
+            fragment.appendChild(clone)
     })
-    contenido.appendChild(fragment)
+    productosAll.appendChild(fragment)
 }
-*/
+
+
 
 
 
