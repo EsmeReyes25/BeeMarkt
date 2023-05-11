@@ -23,6 +23,7 @@ const fragment_bebidas = document.createDocumentFragment()
 const contenido_otros = document.querySelector('#contenido-otros')
 const fragment_otros = document.createDocumentFragment()
 
+const productosAll = document.querySelector('#productosAll')
 
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
 document.addEventListener('DOMContentLoaded', e => {
@@ -38,6 +39,14 @@ const main = () => {
     creaCardsOtros()
 
     // Aquí van las llamadas a las demás funciones y listeners que necesitan de productos[]
+    //Función para buscar un producto
+    Buscar.addEventListener('keyup', () => {
+        console.log('Si llega aqui')
+        let temp = []
+        temp = products.filter(producto => producto.product_name.toLowerCase().includes(Buscar.value.toLowerCase()))
+       creaCardsALL(temp)
+       console.log('temp=>', temp)
+    }) 
 }
 
 // This function updates the products[] list. Good for after adding or removing any
@@ -165,6 +174,26 @@ App.prototype.processingButton = function (event) {
     const listWidth = carruselList.offsetWidth
     track.style.left == "" ? leftPosition = track.style.left = 0 : leftPosition = parseFloat(track.style.left.slice(0, -2) * -1)
     btn.dataset.button == "button-prev" ? prevAction(leftPosition, carruselWidth, track) : nextAction(leftPosition, trackWidth, listWidth, carruselWidth, track)
+}
+
+// Funcion que muestra las tarjetas
+const creaCardsALL = (productos) => {
+    productosAll.innerHTML = ""
+    productos.forEach((item) => {
+        //console.log(item)
+        console.log(item)
+            cardTop.querySelector('img').setAttribute('src', item.image_url)
+            cardTop.querySelector('.nombreProducto').textContent = item.product_name
+            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
+            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            cardTop.querySelector('.diasVenta').textContent = item.sale_days
+            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
+            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
+            const clone = cardTop.cloneNode(true)
+            fragment.appendChild(clone)
+    })
+    productosAll.appendChild(fragment)
 }
 
 let prevAction = (leftPosition, carruselWidth, track) => {

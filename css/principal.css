@@ -313,3 +313,13 @@ addProduct:hover {
 .carrusel-next {
     right: 0px;
 }
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    width: calc(25% - 2rem); /* El ancho de cada tarjeta es 25% menos los margenes */
+    margin: 1rem;
+  }
