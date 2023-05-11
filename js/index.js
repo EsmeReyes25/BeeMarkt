@@ -2,7 +2,7 @@ import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imp
 
 // Form to insert a new product 
 const form = document.querySelector(".formulario") // Selects the form
-const btnAgregar = document.querySelector('.btn-agregar-producto') // Selects the button to add products (there needs to add an id to the button in the principal.html)
+const btnAgregar = document.querySelector('.btnAdd') // Selects the button to add products (there needs to add an id to the button in the principal.html)
 
 // Carga de tarjetas
 const cardTop = document.querySelector('#products-top').content
@@ -27,9 +27,6 @@ const productosAll = document.querySelector('#productosAll')
 
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
 document.addEventListener('DOMContentLoaded', e => {
-    //products = await getProducts()
-    //console.log('productos:', products)
-    //main()
     loadProducts()
 })
 
@@ -42,13 +39,6 @@ const main = () => {
     creaCardsOtros()
 
     // Aquí van las llamadas a las demás funciones y listeners que necesitan de productos[]
-    btnAgregar.addEventListener('click', e => {
-        e.preventDefault(); // Evita que se refresque la página
-        insertProduct()
-        // Aquí se debe limpiar el contenido de la pantalla
-        loadProducts()
-    })
-
     //Función para buscar un producto
     Buscar.addEventListener('keyup', () => {
         console.log('Si llega aqui')
@@ -56,22 +46,38 @@ const main = () => {
         temp = products.filter(producto => producto.product_name.toLowerCase().includes(Buscar.value.toLowerCase()))
        creaCardsALL(temp)
        console.log('temp=>', temp)
-
     }) 
 }
 
+// This function updates the products[] list. Good for after adding or removing any
 const loadProducts = async () => {
     products = await getProducts()
     console.log('productos:', products)
     main()
 }
 
-// ---------------- Aquí van las definiciones de las funciones (y listeners que no dependen de productos[]) ------------------
+// ---------------- Aquí van las definiciones de todas las funciones (y de los listeners que no dependen de productos[]) ------------------
+btnAgregar.addEventListener('click', e => {
+    e.preventDefault(); // Evita que se refresque la página
+    insertProduct()
+    contenido.innerHTML = ''
+    loadProducts()
+})
+
+// Enable or disable the add button in the form
+form.addEventListener('input', () => {
+    if (!form.categ.value || !form.contacto.value || !form.imgUrl.value || !form.precio.value || !form.productName.value || !form.dias.value || !form.horas.value || !form.vendorName.value) {
+        btnAgregar.disabled = true
+    } else {
+        btnAgregar.disabled = false
+    }
+})
+
 // Funciones para mostrar las tarjetas
 const creaCardsOtros = () => {
     products.forEach((item) => {
         if (item.category === 'otros') {
-            console.log(item)
+            //console.log(item)
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -90,7 +96,7 @@ const creaCardsOtros = () => {
 const creaCardsBebidas = () => {
     products.forEach((item) => {
         if (item.category === 'bebidas') {
-            console.log(item)
+            //console.log(item)
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -109,7 +115,7 @@ const creaCardsBebidas = () => {
 const creaCardsComida = () => {
     products.forEach((item) => {
         if (item.category === 'comida') {
-            console.log(item)
+            //console.log(item)
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -128,7 +134,7 @@ const creaCardsComida = () => {
 const creaCards = () => {
     products.forEach((item) => {
         if (item.category === 'dulces') {
-            console.log(item)
+            //console.log(item)
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -171,7 +177,6 @@ App.prototype.processingButton = function (event) {
 }
 
 // Funcion que muestra las tarjetas
-
 const creaCardsALL = (productos) => {
     productosAll.innerHTML = ""
     productos.forEach((item) => {
@@ -190,10 +195,6 @@ const creaCardsALL = (productos) => {
     })
     productosAll.appendChild(fragment)
 }
-
-
-
-
 
 let prevAction = (leftPosition, carruselWidth, track) => {
     if (leftPosition > 0) {
@@ -221,7 +222,9 @@ const insertProduct = async () => {
         vendor_name: form.vendorName.value
     }
     await saveProduct(sendData)
+    console.log('product added:', sendData)
     form.reset()
+    btnAgregar.disabled = true
 }
 
 
