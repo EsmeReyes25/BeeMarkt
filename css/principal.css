@@ -19,7 +19,7 @@ html {
     align-items: center;
     padding: 2rem;
     justify-content: space-around;
-    background-color: #2e3236;
+    background-color: #2d3035;
 }
 
 header.abajo {
@@ -152,7 +152,7 @@ addProduct:hover {
 
 .main {
     padding-top: 7rem;
-    background-color: #2e3236;
+    background-color: #2d3035;
 }
 
 .carrusel {
@@ -163,17 +163,10 @@ addProduct:hover {
     box-sizing: border-box;
     display: flex;
     height: 100%;
-    
-    /*
-    background-color: rgb(46, 50, 54);
-    height: 55rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; */
 }
 
 .carrusel-bs {
-    background-color: rgb(46, 50, 54);
+    background-color: #2d3035;
     height: 55rem;
     display: flex;
     justify-content: space-between;
