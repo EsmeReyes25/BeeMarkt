@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', e => {
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
 const main = () => {
     // Aquí va la llamada a la función para imprimir tarjetas
-    creaCards(products)
+    creaCards()
     creaCardsComida()
     creaCardsBebidas()
     creaCardsOtros()
