@@ -1,7 +1,7 @@
 import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imports the querys to get, save and delete products
 
 // Form to insert a new product 
-const form = document.querySelector(".formulario") // Selects the form
+const form = document.querySelector('.formulario') // Selects the form
 const btnAgregar = document.querySelector('.btnAdd') // Selects the button to add products (there needs to add an id to the button in the principal.html)
 
 // Carga de tarjetas
@@ -60,7 +60,6 @@ const loadProducts = async () => {
 btnAgregar.addEventListener('click', e => {
     e.preventDefault(); // Evita que se refresque la página
     insertProduct()
-    contenido.innerHTML = ''
     loadProducts()
 })
 
@@ -78,6 +77,7 @@ const creaCardsOtros = () => {
     products.forEach((item) => {
         if (item.category === 'otros') {
             //console.log(item)
+            contenido_otros.innerHTML = ''
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -97,6 +97,7 @@ const creaCardsBebidas = () => {
     products.forEach((item) => {
         if (item.category === 'bebidas') {
             //console.log(item)
+            contenido_bebidas.innerHTML = ''
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -116,6 +117,7 @@ const creaCardsComida = () => {
     products.forEach((item) => {
         if (item.category === 'comida') {
             //console.log(item)
+            contenido_comida.innerHTML = ''
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -135,6 +137,7 @@ const creaCards = () => {
     products.forEach((item) => {
         if (item.category === 'dulces') {
             //console.log(item)
+            contenido.innerHTML = ''
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -181,7 +184,7 @@ const creaCardsALL = (productos) => {
     productosAll.innerHTML = ""
     productos.forEach((item) => {
         //console.log(item)
-        console.log(item)
+        //console.log(item)
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
