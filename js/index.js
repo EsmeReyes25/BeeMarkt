@@ -58,9 +58,13 @@ const loadProducts = async () => {
 
 // ---------------- Aquí van las definiciones de todas las funciones (y de los listeners que no dependen de productos[]) ------------------
 btnAgregar.addEventListener('click', e => {
-    e.preventDefault(); // Evita que se refresque la página
+    //e.preventDefault(); // Evita que se refresque la página
     insertProduct()
-    loadProducts()
+    //loadProducts()
+    setTimeout(() => {
+        window.location.reload()
+    }, 1000)
+    //window.location.reload()
 })
 
 // Enable or disable the add button in the form
@@ -77,7 +81,6 @@ const creaCardsOtros = () => {
     products.forEach((item) => {
         if (item.category === 'otros') {
             //console.log(item)
-            contenido_otros.innerHTML = ''
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -97,7 +100,6 @@ const creaCardsBebidas = () => {
     products.forEach((item) => {
         if (item.category === 'bebidas') {
             //console.log(item)
-            contenido_bebidas.innerHTML = ''
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -117,7 +119,6 @@ const creaCardsComida = () => {
     products.forEach((item) => {
         if (item.category === 'comida') {
             //console.log(item)
-            contenido_comida.innerHTML = ''
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -137,7 +138,6 @@ const creaCards = () => {
     products.forEach((item) => {
         if (item.category === 'dulces') {
             //console.log(item)
-            contenido.innerHTML = ''
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
@@ -151,6 +151,26 @@ const creaCards = () => {
         }
     })
     contenido.appendChild(fragment)
+}
+
+// Funcion que muestra las tarjetas
+const creaCardsALL = (productos) => {
+    productosAll.innerHTML = ""
+    productos.forEach((item) => {
+        //console.log(item)
+        //console.log(item)
+            cardTop.querySelector('img').setAttribute('src', item.image_url)
+            cardTop.querySelector('.nombreProducto').textContent = item.product_name
+            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
+            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            cardTop.querySelector('.diasVenta').textContent = item.sale_days
+            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
+            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
+            const clone = cardTop.cloneNode(true)
+            fragment.appendChild(clone)
+    })
+    productosAll.appendChild(fragment)
 }
 
 // Change color effect on header
@@ -177,26 +197,6 @@ App.prototype.processingButton = function (event) {
     const listWidth = carruselList.offsetWidth
     track.style.left == "" ? leftPosition = track.style.left = 0 : leftPosition = parseFloat(track.style.left.slice(0, -2) * -1)
     btn.dataset.button == "button-prev" ? prevAction(leftPosition, carruselWidth, track) : nextAction(leftPosition, trackWidth, listWidth, carruselWidth, track)
-}
-
-// Funcion que muestra las tarjetas
-const creaCardsALL = (productos) => {
-    productosAll.innerHTML = ""
-    productos.forEach((item) => {
-        //console.log(item)
-        //console.log(item)
-            cardTop.querySelector('img').setAttribute('src', item.image_url)
-            cardTop.querySelector('.nombreProducto').textContent = item.product_name
-            cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-            cardTop.querySelector('.categoriaProducto').textContent = item.category
-            cardTop.querySelector('.diasVenta').textContent = item.sale_days
-            cardTop.querySelector('.horasVenta').textContent = item.sale_hours
-            cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
-            const clone = cardTop.cloneNode(true)
-            fragment.appendChild(clone)
-    })
-    productosAll.appendChild(fragment)
 }
 
 let prevAction = (leftPosition, carruselWidth, track) => {
@@ -227,7 +227,7 @@ const insertProduct = async () => {
     await saveProduct(sendData)
     console.log('product added:', sendData)
     form.reset()
-    btnAgregar.disabled = true
+    btnAgregar.disabled = true  
 }
 
 
