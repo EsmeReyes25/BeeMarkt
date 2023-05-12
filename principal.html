@@ -142,7 +142,7 @@
                     </form>
                 </div>
                 <div class="pie-modal">
-                    <button type="button" class="btn-cerrar-dialogo" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn-cerrar-dialogo" id="btnClose" data-bs-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn-agregar-producto btnAdd" id="btnAdd" data-bs-dismiss="modal" disabled="true">Agregar</button>
                 </div>
             </div>
@@ -424,11 +424,31 @@
                       <a target="_blank" href="" class="contactoVendedor btn btn-warning" style="font-size: 2rem; display: block; font-weight: 500; border-radius: 10px;">
                         Apartar
                       </a>
+                      <i class="fa-solid fa-trash text-danger" id="btnModal-delete" style="font-size: 24px; float: right; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modal-delete"></i>
                     </div>
                 </div>
             </template>
         </section>
     </main>
+  
+  <!-- Modal Delete -->
+  <div class="modal fade" id="modal-delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnCancel" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="btnDelete" data-bs-dismiss="modal">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!--
     <footer class="footer">
