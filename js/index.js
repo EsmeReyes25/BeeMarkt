@@ -2,8 +2,6 @@ import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imp
 
 // Form to insert a new product 
 const form = document.querySelector(".formulario") // Selects the form
-const btnAgregar = document.querySelector('.btnAdd') // Selects the button to add products (there needs to add an id to the button in the principal.html)
-
 
 
 // Carga de tarjetas
@@ -12,7 +10,8 @@ const contenido = document.querySelector('#contenido-productos')
 const fragment = document.createDocumentFragment()
 const Buscar = document.getElementById('buscador') // ******PENDIENTE******
 let products = []
-// let 
+
+
 
 //Seccion Comida
 const contenido_comida = document.querySelector('#contenido-comida')
@@ -29,9 +28,6 @@ const fragment_otros = document.createDocumentFragment()
 
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
 document.addEventListener('DOMContentLoaded', e => {
-    //products = await getProducts()
-    //console.log('productos:', products)
-    //main()
     loadProducts()
 })
 
@@ -42,19 +38,11 @@ const main = () => {
     creaCardsComida()
     creaCardsBebidas()
     creaCardsOtros()
-
-    // Aquí van las llamadas a las demás funciones y listeners que necesitan de productos[]
-    btnAgregar.addEventListener('click', e => {
-        e.preventDefault(); // Evita que se refresque la página
-        insertProduct()
-        // Aquí se debe limpiar el contenido de la pantalla
-        cardTop.innerHTML = ''
-        loadProducts()
-
-        
-    })
+    
 }
-
+    
+    
+    
 const loadProducts = async () => {
     products = await getProducts()
     console.log('productos:', products)
@@ -74,7 +62,7 @@ const creaCardsOtros = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
             fragment_otros.appendChild(clone)
         }
@@ -93,7 +81,7 @@ const creaCardsBebidas = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
             fragment_bebidas.appendChild(clone)
         }
@@ -112,7 +100,7 @@ const creaCardsComida = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
             fragment_comida.appendChild(clone)
         }
@@ -131,8 +119,7 @@ const creaCards = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
-            cardTop.querySelector('a').setAttribute('href', item.contact)
+            cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
             fragment.appendChild(clone)
         }
