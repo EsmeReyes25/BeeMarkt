@@ -2,14 +2,18 @@ import { getProducts, saveProduct, deleteProduct } from './connection.js' // Imp
 
 // Form to insert a new product 
 const form = document.querySelector('.formulario') // Selects the form
-const btnAgregar = document.querySelector('.btnAdd') // Selects the button to add products (there needs to add an id to the button in the principal.html)
+const btnAdd = document.querySelector('.btnAdd') // Selects the button to add products
+const btnClose = document.querySelector('#btnClose') // Selects the button to close the form
+
+// Modal to delete a product
+const btnDelete = document.querySelector('#btnDelete') // Selects the button to delete the product
+const btnCancel = document.querySelector('#btnCancel') // Selects the button to cancel
 
 // Carga de tarjetas
 const cardTop = document.querySelector('#products-top').content
 const contenido = document.querySelector('#contenido-productos')
 const fragment = document.createDocumentFragment()
 const Buscar = document.getElementById('buscador') 
-let products = []
 
 //Seccion Comida
 const contenido_comida = document.querySelector('#contenido-comida')
@@ -23,16 +27,19 @@ const fragment_bebidas = document.createDocumentFragment()
 const contenido_otros = document.querySelector('#contenido-otros')
 const fragment_otros = document.createDocumentFragment()
 
+// Seccion general
 const productosAll = document.querySelector('#productosAll')
 
-// Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function
+let products = [] // Here the products are loaded from the database
+let productDelete = {} // Temporal object to call the deleteProd() function
+
+// Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function called inside loadProducts()
 document.addEventListener('DOMContentLoaded', e => {
     loadProducts()
 })
 
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
 const main = () => {
-    // Aquí va la llamada a la función para imprimir tarjetas
     creaCards()
     creaCardsComida()
     creaCardsBebidas()
@@ -41,38 +48,50 @@ const main = () => {
     // Aquí van las llamadas a las demás funciones y listeners que necesitan de productos[]
     //Función para buscar un producto
     Buscar.addEventListener('keyup', () => {
-        console.log('Si llega aqui')
+        //console.log('Si llega aqui')
         let temp = []
         temp = products.filter(producto => producto.product_name.toLowerCase().includes(Buscar.value.toLowerCase()))
        creaCardsALL(temp)
-       console.log('temp=>', temp)
+       //console.log('temp=>', temp)
     }) 
 }
 
-// This function updates the products[] list. Good for after adding or removing any
+// ---------------- Aquí van las definiciones de todas las funciones (y de los listeners que no dependen de productos[]) ------------------
+// This function updates the products[] list and re-print them. Good for after adding or removing any
 const loadProducts = async () => {
     products = await getProducts()
     console.log('productos:', products)
     main()
 }
 
-// ---------------- Aquí van las definiciones de todas las funciones (y de los listeners que no dependen de productos[]) ------------------
-btnAgregar.addEventListener('click', e => {
-    //e.preventDefault(); // Evita que se refresque la página
-    insertProduct()
-    //loadProducts()
-    setTimeout(() => {
-        window.location.reload()
-    }, 1000)
-    //window.location.reload()
+// Button (inside the modal) to add a product
+btnAdd.addEventListener('click', async() => {
+    await insertProduct()
+    window.location.reload()
+})
+
+// Button to close the 'insert product' form and reset the form fields
+btnClose.addEventListener('click', () => {
+    form.reset()
+})
+
+// Button (inside the modal) to delete a product
+btnDelete.addEventListener('click', async() => {
+    await deleteProd(productDelete)
+    window.location.reload()
+})
+
+// Button to close the 'delete' modal and clear productDelete
+btnCancel.addEventListener('click', () => {
+    productDelete = {}
 })
 
 // Enable or disable the add button in the form
 form.addEventListener('input', () => {
     if (!form.categ.value || !form.contacto.value || !form.imgUrl.value || !form.precio.value || !form.productName.value || !form.dias.value || !form.horas.value || !form.vendorName.value) {
-        btnAgregar.disabled = true
+        btnAdd.disabled = true
     } else {
-        btnAgregar.disabled = false
+        btnAdd.disabled = false
     }
 })
 
@@ -90,6 +109,9 @@ const creaCardsOtros = () => {
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
             cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
+            clone.querySelector('#btnModal-delete').addEventListener('click', () => {
+                productDelete = item
+            })
             fragment_otros.appendChild(clone)
         }
     })
@@ -109,6 +131,9 @@ const creaCardsBebidas = () => {
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
             cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
+            clone.querySelector('#btnModal-delete').addEventListener('click', () => {
+                productDelete = item
+            })
             fragment_bebidas.appendChild(clone)
         }
     })
@@ -128,6 +153,9 @@ const creaCardsComida = () => {
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
             cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
+            clone.querySelector('#btnModal-delete').addEventListener('click', () => {
+                productDelete = item
+            })
             fragment_comida.appendChild(clone)
         }
     })
@@ -147,17 +175,19 @@ const creaCards = () => {
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
             cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
+            clone.querySelector('#btnModal-delete').addEventListener('click', () => {
+                productDelete = item
+            })
             fragment.appendChild(clone)
         }
     })
     contenido.appendChild(fragment)
 }
 
-// Funcion que muestra las tarjetas
+// Funcion que muestra todas las tarjetas
 const creaCardsALL = (productos) => {
     productosAll.innerHTML = ""
     productos.forEach((item) => {
-        //console.log(item)
         //console.log(item)
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
@@ -168,6 +198,9 @@ const creaCardsALL = (productos) => {
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
             cardTop.querySelector('.contactoVendedor').setAttribute('href', item.contact)
             const clone = cardTop.cloneNode(true)
+            clone.querySelector('#btnModal-delete').addEventListener('click', () => {
+                productDelete = item
+            })
             fragment.appendChild(clone)
     })
     productosAll.appendChild(fragment)
@@ -225,13 +258,12 @@ const insertProduct = async () => {
         vendor_name: form.vendorName.value
     }
     await saveProduct(sendData)
-    console.log('product added:', sendData)
     form.reset()
-    btnAgregar.disabled = true  
+    btnAdd.disabled = true  
 }
-
 
 // Function to delete a product
 const deleteProd = async (prod) => {
     await deleteProduct(prod)
+    productDelete = {}
 }
