@@ -38,7 +38,7 @@ const getProducts = async () => {
 // POST
 const saveProduct = async (sendData) => {
     try{
-        addDoc(productos, sendData)
+        await addDoc(productos, sendData)
         console.log("Product saved successfully:", sendData.product_name)
     } catch(err){
         console.error("Error! Couldn't save the product:", err)
