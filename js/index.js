@@ -13,7 +13,8 @@ const btnCancel = document.querySelector('#btnCancel') // Selects the button to 
 const cardTop = document.querySelector('#products-top').content
 const contenido = document.querySelector('#contenido-productos')
 const fragment = document.createDocumentFragment()
-const Buscar = document.getElementById('buscador') 
+const Buscar = document.getElementById('buscador')
+
 
 //Seccion Comida
 const contenido_comida = document.querySelector('#contenido-comida')
@@ -34,8 +35,10 @@ let products = [] // Here the products are loaded from the database
 let productDelete = {} // Temporal object to call the deleteProd() function
 
 // Load the document, fetch the elements from the database and saves it in the 'products' list, then starts the main() function called inside loadProducts()
-document.addEventListener('DOMContentLoaded', e => {
-    loadProducts()
+document.addEventListener('DOMContentLoaded', async(e) => {
+    products = await getProducts()
+    console.log('productos:', products)
+    main()
 })
 
 // The main function prevents any method from being executed if the products in the list have not been loaded yet
@@ -44,26 +47,19 @@ const main = () => {
     creaCardsComida()
     creaCardsBebidas()
     creaCardsOtros()
-
+    
     // Aquí van las llamadas a las demás funciones y listeners que necesitan de productos[]
     //Función para buscar un producto
     Buscar.addEventListener('keyup', () => {
         //console.log('Si llega aqui')
         let temp = []
         temp = products.filter(producto => producto.product_name.toLowerCase().includes(Buscar.value.toLowerCase()))
-       creaCardsALL(temp)
-       //console.log('temp=>', temp)
+        creaCardsALL(temp)
+        //console.log('temp=>', temp)
     }) 
-}
-
+} 
+   
 // ---------------- Aquí van las definiciones de todas las funciones (y de los listeners que no dependen de productos[]) ------------------
-// This function updates the products[] list and re-print them. Good for after adding or removing any
-const loadProducts = async () => {
-    products = await getProducts()
-    console.log('productos:', products)
-    main()
-}
-
 // Button (inside the modal) to add a product
 btnAdd.addEventListener('click', async() => {
     await insertProduct()
@@ -256,11 +252,12 @@ const insertProduct = async () => {
         sale_days: form.dias.value,
         sale_hours: form.horas.value,
         vendor_name: form.vendorName.value
-    }
+    };
     await saveProduct(sendData)
     form.reset()
-    btnAdd.disabled = true  
-}
+    btnAdd.disabled = true
+};
+
 
 // Function to delete a product
 const deleteProd = async (prod) => {
