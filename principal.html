@@ -56,10 +56,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form name="formulario" class="formulario" id="formulario">
+                        <form name="formulario" class="formulario">
                             <fieldset>
                                 <label for="categ" class="etiqueta-label">Categoría:</label>
                                     <select name="categ" id="categ" class="input-formulario" style="width: 100%" required>
+                                        <option value="">Seleccione una opción</option>
                                         <option value="comida">Comida</option>
                                         <option value="bebidas">Bebidas</option>
                                         <option value="dulces">Dulces</option>
@@ -141,8 +142,8 @@
                         </form>
                     </div>
                     <div class="pie-modal">
-                        <button type="button" class="btn-cerrar-dialogo" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn-agregar-producto btnAdd" id="btnAdd" data-bs-dismiss="modal">Agregar</button>
+                        <button type="button" class="btn-cerrar-dialogo" id="btnClose" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn-agregar-producto btnAdd" id="btnAdd" data-bs-dismiss="modal" disabled="true">Agregar</button>
                     </div>
             </div>
             </div>
@@ -424,7 +425,8 @@
                         Apartar
                       </a>
                       <i class="fa-solid fa-trash text-danger" id="btnModal-delete" style="font-size: 24px; float: right; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modal-delete"></i>
-                    </div>                    
+                    </div>  
+                </div>
             </template>
         </section>
     </main>
@@ -447,6 +449,7 @@
       </div>
     </div>
   </div>
+    
     <!--
     <footer class="footer">
         <div class="container">
