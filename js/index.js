@@ -70,7 +70,7 @@ const creaCardsOtros = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.btnContacto') = item.contact
             const clone = cardTop.cloneNode(true)
             fragment_otros.appendChild(clone)
         }
@@ -89,7 +89,7 @@ const creaCardsAccesorios = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.btnContacto') = item.contact
             const clone = cardTop.cloneNode(true)
             fragment_accesorios.appendChild(clone)
         }
@@ -108,7 +108,7 @@ const creaCardsPapeleria = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.btnContacto') = item.contact
             const clone = cardTop.cloneNode(true)
             fragment_papeleria.appendChild(clone)
         }
@@ -127,7 +127,7 @@ const creaCardsBebidas = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.btnContacto') = item.contact
             const clone = cardTop.cloneNode(true)
             fragment_bebidas.appendChild(clone)
         }
@@ -146,7 +146,7 @@ const creaCardsComida = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
+            cardTop.querySelector('.btnContacto') = item.contact
             const clone = cardTop.cloneNode(true)
             fragment_comida.appendChild(clone)
         }
@@ -165,8 +165,7 @@ const creaCards = () => {
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
-            cardTop.querySelector('.contactoVendedor').textContent = item.contact
-            cardTop.querySelector('a').setAttribute('href', item.contact)
+            cardTop.querySelector('.btnContacto') = item.contact
             const clone = cardTop.cloneNode(true)
             fragment.appendChild(clone)
         }
