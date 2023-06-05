@@ -99,7 +99,7 @@ const creaCardsOtros = () => {
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            //cardTop.querySelector('.categoriaProducto').textContent = item.category
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
@@ -121,7 +121,7 @@ const creaCardsBebidas = () => {
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            //cardTop.querySelector('.categoriaProducto').textContent = item.category
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
@@ -143,7 +143,7 @@ const creaCardsComida = () => {
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            //cardTop.querySelector('.categoriaProducto').textContent = item.category
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
@@ -165,7 +165,7 @@ const creaCards = () => {
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            //cardTop.querySelector('.categoriaProducto').textContent = item.category
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
@@ -188,7 +188,7 @@ const creaCardsALL = (productos) => {
             cardTop.querySelector('img').setAttribute('src', item.image_url)
             cardTop.querySelector('.nombreProducto').textContent = item.product_name
             cardTop.querySelector('.precioProducto').textContent = '$ ' + item.price
-            cardTop.querySelector('.categoriaProducto').textContent = item.category
+            //cardTop.querySelector('.categoriaProducto').textContent = item.category
             cardTop.querySelector('.diasVenta').textContent = item.sale_days
             cardTop.querySelector('.horasVenta').textContent = item.sale_hours
             cardTop.querySelector('.nombreVendedor').textContent = item.vendor_name
